@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  pgsql:
+    build: 
+      context: ./infra/pgsql
+      dockerfile: Dockerfile 
+    container_name: pgsql
+    environment:
+      POSTGRES_DB: inter_rapidisio
+      POSTGRES_USER: jhossweb
+      POSTGRES_PASSWORD: secret
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-inter
+
+  
+  composer:
+    image: composer:2.7
+    working_dir: /var/www
+    container_name: composer
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - pgsql
+
+
+  server:
+    build: 
+      context: ./infra/php
+      dockerfile: Dockerfile
+    container_name: server
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    ports:
+      - "80:80"
+    networks:
+      - app-inter
+    depends_on:
+      - pgsql
+      - composer
+
+networks:
+  app-inter:
+    driver: bridge
+
+volumes:
+  pgdata:
