@@ -50,7 +50,7 @@ ENV ASSET_URL=https://laravel-sail-base-1.onrender.com
 ENV DB_URL=postgresql://jhossweb:7d1db0uPHmeMSS0d68tm5EZAWWlMlBFN@dpg-cqfioi2ju9rs73btqfhg-a/inter_rapidisimo
 
 # Comando para iniciar el servidor web y aplicar migraciones
-RUN php artisan migrate
+RUN php artisan migrate --seed
 CMD php artisan serve --host=0.0.0.0 --port=8000
 
 EXPOSE 8000
