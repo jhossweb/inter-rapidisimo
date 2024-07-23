@@ -44,7 +44,7 @@ ENV APP_DEBUG=false
 ENV APP_KEY=base64:WSrr+SLrQB3xUmWnNHaeug02LVNX+V5FtN9na9nN8vQ=
 ENV APP_URL=https://laravel-sail-base-1.onrender.com
 ENV ASSET_URL=https://laravel-sail-base-1.onrender.com
-ENV DB_CONNECTION=sqlite
+ENV DB_URL=postgresql://jhossweb:7d1db0uPHmeMSS0d68tm5EZAWWlMlBFN@dpg-cqfioi2ju9rs73btqfhg-a/inter_rapidisimo
 
 # Comando para iniciar el servidor web y aplicar migraciones
 RUN php artisan migrate
