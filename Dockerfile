@@ -22,10 +22,11 @@ RUN apt-get update && apt-get install -y \
     vim \
     git \
     curl \
-    ffmpeg
+    ffmpeg \
+    libpq-dev
 
 # Extensiones PHP
-RUN docker-php-ext-install pdo pdo_mysql zip exif pcntl bcmath
+RUN docker-php-ext-install pdo pdo_pgsql pgsql zip exif pcntl bcmath
 RUN echo "max_input_vars = 5000" >> /usr/local/etc/php/php.ini
 
 # Instalación de Composer
@@ -42,7 +43,7 @@ RUN mkdir -p /app/storage/logs
 
 ENV APP_DEBUG=false
 ENV APP_KEY=base64:WSrr+SLrQB3xUmWnNHaeug02LVNX+V5FtN9na9nN8vQ=
-ENV APP_URL=https://laravel-sail-base-1.onrender.com
+ENV APP_URL=https://inter-rapidisimo.onrender.com
 ENV ASSET_URL=https://laravel-sail-base-1.onrender.com
 ENV DB_URL=postgresql://jhossweb:7d1db0uPHmeMSS0d68tm5EZAWWlMlBFN@dpg-cqfioi2ju9rs73btqfhg-a/inter_rapidisimo
 
