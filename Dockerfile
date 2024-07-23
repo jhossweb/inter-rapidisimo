@@ -1,12 +1,14 @@
 FROM php:8.3-apache
 
-WORKDIR /var/www/html
+WORKDIR /var/www
 
 # Configura Apache
 RUN a2enmod rewrite
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Establecer permisos
+RUN chown -R www-data:www-data /var/www
+
+RUN sed -ri -e 's!/var/www/html!/var/www/public!g' /etc/apache2/sites-available/000-default.conf
+RUN sed -ri -e 's!/var/www/!/var/www/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Instalación de paquetes adicionales
 RUN apt-get update && apt-get install -y \
